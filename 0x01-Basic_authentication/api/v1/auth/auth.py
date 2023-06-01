@@ -8,6 +8,7 @@ import fnmatch
 
 class Auth:
     """ Authentication class """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Checks if authentication is required for the given path
         """
@@ -15,8 +16,12 @@ class Auth:
             return True
         if excluded_paths is None or len(excluded_paths) == 0:
             return True
-        for pattern in excluded_paths:
-            if fnmatch.fnmatch(path, pattern):
+        for excluded_path in excluded_paths:
+            if excluded_path.endswith('*'):
+                pattern = excluded_path.rstrip('*')
+                if path.startswith(pattern):
+                    return False
+            elif path.rstrip('/') == excluded_path.rstrip('/'):
                 return False
         return True
 
