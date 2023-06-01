@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """ Module of Authentication
 """
-from flask import request
-from typing import List, TypeVar
+from flask import request, Request
+from typing import List, TypeVar, Optional
 import fnmatch
-
+import os
 
 class Auth:
     """ Authentication class """
@@ -36,3 +36,10 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """ method to return the user """
         return None
+
+    def session_cookie(self, request: Optional[Request] = None) -> Optional[str]:
+        """ Return a cookie value from a request """
+        if request is None:
+            return None
+        session_cookie_name = os.getenv("SESSION_NAME", "_my_session_id")
+        return request.cookies.get(session_cookie_name)
