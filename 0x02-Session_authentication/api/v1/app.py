@@ -8,6 +8,9 @@ from flask import Flask, jsonify, abort, request
 from flask_cors import CORS, cross_origin
 from api.v1.auth.auth import Auth
 from api.v1.auth.session_auth import SessionAuth
+from api.v1.auth.session_exp_auth import SessionExpAuth
+import os
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -15,10 +18,11 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 auth = None
 
-if getenv("AUTH_TYPE") == "session_auth":
-    auth = SessionAuth()
+auth_type = os.getenv("AUTH_TYPE")
+if auth_type == "session_exp_auth":
+    auth = SessionExpAuth()
 else:
-    auth = Auth()
+    auth = SessionAuth()
 
 
 @app.before_request
