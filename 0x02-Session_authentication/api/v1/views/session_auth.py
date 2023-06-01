@@ -33,3 +33,12 @@ def session_login():
     response.set_cookie(key=session_cookie_name, value=session_id)
 
     return response
+
+
+@app_views.route(
+  '/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def session_logout():
+    """ Session logout method """
+    if not auth.destroy_session(request):
+        abort(404)
+    return jsonify({})
