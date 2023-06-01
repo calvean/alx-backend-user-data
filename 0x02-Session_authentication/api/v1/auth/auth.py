@@ -6,6 +6,7 @@ from typing import List, TypeVar, Optional
 import fnmatch
 import os
 
+
 class Auth:
     """ Authentication class """
 
@@ -37,7 +38,9 @@ class Auth:
         """ method to return the user """
         return None
 
-    def session_cookie(self, request: Optional[Request] = None) -> Optional[str]:
+    def session_cookie(
+      self,
+      request: Optional[Request] = None) -> Optional[str]:
         """ Return a cookie value from a request """
         if request is None:
             return None
