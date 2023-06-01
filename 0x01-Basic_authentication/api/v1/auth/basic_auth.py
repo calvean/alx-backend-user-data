@@ -4,7 +4,7 @@
 import base64
 from api.v1.auth.auth import Auth
 from models.user import User
-from typing import TypeVar
+from typing import TypeVar, Tuple
 
 
 class BasicAuth(Auth):
@@ -40,15 +40,15 @@ class BasicAuth(Auth):
 
     def extract_user_credentials(
       self,
-      decoded_base64_authorization_header: str) -> (str, str):
-        """ extract user credentials """
+      decoded_base64_authorization_header: str) -> Tuple[str, str]:
+        """ Extracts the user credentials
+         from the decoded base64 authorization header
+        """
         if decoded_base64_authorization_header is None or not isinstance(
           decoded_base64_authorization_header, str):
             return None, None
-
         if ':' not in decoded_base64_authorization_header:
             return None, None
-
         email, password = decoded_base64_authorization_header.split(':', 1)
         return email, password
 
