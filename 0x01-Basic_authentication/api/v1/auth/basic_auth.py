@@ -4,6 +4,7 @@
 import base64
 from api.v1.auth.auth import Auth
 from models.user import User
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
@@ -52,7 +53,7 @@ class BasicAuth(Auth):
         return email, password
 
     def user_object_from_credentials(
-      self, user_email: str, user_pwd: str) -> User:
+      self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """ return user object """
         if user_email is None or not isinstance(user_email, str):
             return None
