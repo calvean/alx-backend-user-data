@@ -40,7 +40,7 @@ class Auth:
 
     def session_cookie(
       self,
-      request=None):
+      request: Optional[Request] = None) -> Optional[str]:
         """ Return a cookie value from a request """
         if request is None:
             return None
