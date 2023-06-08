@@ -13,8 +13,10 @@ def update_password() -> str:
     """ Changes the password.
 
     Returns:
-        JSON response with email and message if the password is updated successfully.
-        200 status code if the update is successful, otherwise 403 status code.
+        JSON response with email and message
+         if the password is updated successfully.
+        200 status code if the update is successful,
+         otherwise 403 status code.
     """
     try:
         email = request.form['email']
@@ -36,7 +38,8 @@ def reset_password() -> str:
     """ Resets the password and generates a reset password token.
 
     Returns:
-        JSON response with email and reset_token if the token is generated successfully.
+        JSON response with email and reset_token
+         if the token is generated successfully.
         200 status code if the token is generated, otherwise 403 status code.
     """
     try:
@@ -79,7 +82,8 @@ def logout() -> str:
 
     Returns:
         Redirects to the main page with a 302 status code.
-        403 status code if the session ID is not found or the user is not found.
+        403 status code if the session ID is not found
+         or the user is not found.
     """
     session_id = request.cookies.get('session_id', None)
 
@@ -137,7 +141,8 @@ def register_user() -> str:
     """ Registers a new user.
 
     Returns:
-        JSON response with email and message if the user is created successfully.
+        JSON response with email and message
+         if the user is created successfully.
         400 status code if the email or password is missing.
         400 status code if the email is already registered.
     """
