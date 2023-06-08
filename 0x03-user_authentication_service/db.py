@@ -21,8 +21,8 @@ class DB:
         self.__session = None
 
     @property
-    def _session(self) -> Session:
-        """Memoized session object
+    def _private_session(self) -> Session:
+        """Memoized private session object
         """
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
@@ -42,6 +42,6 @@ class DB:
 
         """
         user = User(email=email, hashed_password=hashed_password)
-        self._session.add(user)
-        self._session.commit()
+        self._private_session.add(user)
+        self._private_session.commit()
         return user
